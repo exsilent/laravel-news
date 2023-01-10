@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  php-fpm:
+    container_name: news-php-fpm
+    build: ./docker/php-fpm
+#    environment:
+#      - PHP_IDE_CONFIG=serverName=news
+    volumes:
+      - ./:/var/www
+  nginx:
+    container_name: news-nginx
+    build: ./docker/nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/logs:/var/log/nginx
+    depends_on:
+      - php-fpm
+  mysql:
+    image: mysql:8
+    container_name: news-mysql
+#    ports:
+#      - "33306:3306"
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root

@@ -6,7 +6,8 @@ RUN apk add --update --no-cache \
     zip \
     shadow \
     autoconf \
-    bash
+    bash \
+    netcat-openbsd
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 

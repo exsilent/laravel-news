@@ -5,7 +5,7 @@ services:
     container_name: news-php-fpm
     build: ./docker/php-fpm
     volumes:
-      - ./:/var/
+      - ./:/var/www
     depends_on:
       - mysql
   nginx:
